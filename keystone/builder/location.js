@@ -1,5 +1,6 @@
 const config = require('../config.js')
 const path = require('path')
+const logServer = require('../server/log-server.js')
 
 const dirFuncs = {
   '.html': {
@@ -31,14 +32,17 @@ function doHtml (filePath, fileObj, dirName, file) {
 }
 
 function pagesLocation (filePath, fileObj, file) {
+
   const fileSplit = fileObj.dir.split(path.sep).length > 1 ? fileObj.dir.split(path.sep).slice(1).join(path.sep) : ''
-  if (fileObj.name === 'index') {
+  /*if (fileObj.name === 'index') {
     file.newFilePath(path.join(config.served, fileSplit, 'index.html'))
     return true
   } else {
     file.newFilePath(path.join(config.served, fileSplit, fileObj.name, 'index.html'))
     return true
-  }
+  }*/
+  file.newFilePath(path.join(config.served, fileSplit, '', fileObj.name + '.html'))
+  return true
 }
 
 function styleLocation (filePath, fileObj, file) {
